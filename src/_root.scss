@@ -1,0 +1,7 @@
+:root {
+	@if variable-exists(root-variables) and type-of($root-variables) == 'map' {
+		@each $name, $value in $root-variables {
+			--#{$name}: #{$value};
+		}
+	}
+}
