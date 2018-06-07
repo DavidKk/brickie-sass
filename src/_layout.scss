@@ -117,4 +117,13 @@
 .brickie-content {
 	flex: 1;
 	-webkit-overflow-scrolling: touch;
+	transition: margin-left .26s ease-in-out;
+
+	@include media-breakpoint-down(md) {
+		margin-left: $nav-md-width;
+
+		.brickie-navbar-open & {
+			margin-left: 0;
+		}
+	}
 }
