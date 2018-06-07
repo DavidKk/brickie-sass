@@ -1,0 +1,17 @@
+@if global-variable-exists(screen-breakpoints) and type-of($screen-breakpoints) == 'map' {
+  @each $breakpoint in map-keys($screen-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+      $infix: breakpoint-infix($breakpoint, $screen-breakpoints);
+
+      .mt#{$infix}-#{0} { margin-top: 0 !important; }
+      .mr#{$infix}-#{0} { margin-right: 0 !important; }
+      .mb#{$infix}-#{0} { margin-bottom: 0 !important; }
+      .ml#{$infix}-#{0} { margin-left: 0 !important; }
+
+      .mt#{$infix}-auto { margin-top: auto !important; }
+      .mr#{$infix}-auto { margin-right: auto !important; }
+      .mb#{$infix}-auto { margin-bottom: auto !important; }
+      .ml#{$infix}-auto { margin-left: auto !important; }
+    }
+  }
+}
