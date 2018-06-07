@@ -43,10 +43,13 @@
 		transform .16s ease-in;
 
 	@include media-breakpoint-down(md) {
-		flex-basis: $nav-md-width;
-		width: $nav-md-width;
 		height: calc(100% - #{$header-height});
 		transform: translateY($header-height);
+
+		body:not(.brickie-navbar-open) & {
+			flex-basis: $nav-md-width;
+			width: $nav-md-width;
+		}
 	}
 
 	@include media-breakpoint-down(sm) {
@@ -80,6 +83,10 @@
 
 	@include media-breakpoint-down(md) {
 		margin-left: -$nav-md-width;
+
+		.brickie-navbar-open & {
+			margin-left: -$nav-width;
+		}
 	}
 }
 
