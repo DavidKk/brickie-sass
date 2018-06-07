@@ -1,0 +1,170 @@
+/* Aside Navbar
+	 ========================================================================== */
+
+/**
+ * It is the main page navigation.
+ * It has a scroll bar that can slide up and down.
+ * And it also supports sub navigation.
+**/
+
+$slidenav-item-height: 2.5rem; // 40px in root with 16px font-size by default
+
+.slidenav {
+	flex: 1;
+	-webkit-overflow-scrolling: touch;
+}
+
+/**
+ * The Wrapper that wraps a link and a sub navigation menu.
+ * It's not a link (`<a>`), because there are other
+ * links to the sub navigation, and the background
+ * of the wrapper (`.slidenav-item`) will affect its
+ * sub navigation.
+ *
+ * Example:
+ * <nav class="slidenav-item">
+ *  <a></a>
+ *  <ul class="slidenav-sub"></ul>
+ * </nav>
+**/
+
+.slidenav-item {
+	> a {
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding: 0 .9375rem;
+		width: 100%;
+		height: $slidenav-item-height;
+		transition:
+			background-color .26s ease-in,
+			color .16s ease;
+    cursor: pointer;
+  }
+
+  /**
+   * The color block before every navigation.
+   * It will display by animtionwhen user hover
+   * or choose the navigation.
+  **/
+	> a:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		width: .25rem;
+		height: 100%;
+		background-color: var(--secondary);
+		transform: translateX(-.25rem);
+    transition:
+      transform .16s ease-in-out,
+      background-color .16s ease-in-out;
+	}
+
+  /**
+   * If the tag `<a>` is the only item in
+   * the `.slidenav-item`, it means tab `<a>`
+   * has a sibling element `.slidenav-sub`;
+   * So we can set pseudo element `after`
+   * to construct the arrow icon.
+  **/
+	> a:after {
+		content: "";
+		display: block;
+		align-self: flex-end;
+		margin: auto 0 auto auto;
+		border-top: 1px solid $gray-600;
+		border-right: 1px solid $gray-600;
+		width: .5rem;
+		height: .5rem;
+		transform: rotate(45deg);
+	}
+
+	/**
+	 * There is means no sub menu when
+	 * the navbar item has only one element.
+	**/
+	> a:only-child:after {
+		display: none;
+	}
+
+	> a > i {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-right: .625rem;
+		width: 1.5rem; // 24px
+		height: 1.5rem; // 24px
+	}
+}
+
+/**
+ * Displaying color blocks by slide out animation
+ * when mouse hover or user choose the navigation
+**/
+
+.slidenav-item > a:hover:before,
+.slidenav-item.active > a:before {
+	transform: translate(0);
+}
+
+.slidenav-item > a:hover {
+	color: var(--secondary);
+}
+
+.slidenav-item.active > a {
+	background-color: $gray-100;
+	color: var(--secondary);
+
+  &:only-child {
+    color: var(--primary);
+  }
+
+  &:before {
+    background-color: var(--primary);
+  }
+
+	&:after {
+		transform: rotate(135deg);
+  }
+}
+
+.slidenav-item.active > ul {
+	display: flex;
+}
+
+/**
+ * 1. The size of sub menu item is sum of
+ * left padding of link, the icon size in
+ * the navigation and its left margin.
+**/
+
+.slidenav-sub {
+	display: none;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	> li {
+		padding: 0;
+	}
+
+	> li > a {
+		display: flex;
+		align-items: center;
+		padding-left: .9375rem + 1.5rem + .625rem; // 1
+    height: $slidenav-item-height;
+    transition: color .26s ease-in-out;
+    cursor: pointer;
+  }
+
+  > li > a:hover {
+    color: var(--secondary);
+  }
+
+  > li.active > a {
+    color: var(--primary);
+  }
+}
