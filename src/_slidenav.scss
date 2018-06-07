@@ -56,7 +56,7 @@
 		display: block;
 		width: .25rem;
 		height: 100%;
-		background-color: var(--secondary);
+		background-color: transparent;
 		transform: translateX(-.25rem);
     transition:
       transform .16s ease-in-out,
@@ -123,6 +123,7 @@
 
 .slidenav-item > a:hover:before,
 .slidenav-item.active > a:before {
+	background-color: var(--secondary);
 	transform: translate(0);
 }
 

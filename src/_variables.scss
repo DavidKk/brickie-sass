@@ -106,12 +106,13 @@ $body-color: $gray-900 !default;
 //
 // Define the maximum width for different screen sizes.
 
-$grid-breakpoints: (
+$screen-breakpoints: (
   xs: 0,
   sm: 576px,
   md: 768px,
   lg: 992px,
-  xl: 1200px
+  xl: 1200px,
+  xxl: 1920px
 ) !default;
 
 
@@ -119,10 +120,11 @@ $grid-breakpoints: (
 //
 // Define size of main layout components
 
+$gutter: 1.875rem; // 30px in root with 16px font-size by deafult
+
 $nav-width: 15rem; // 240px in root with 16px font-size by deafult
 $nav-md-width: 3.125rem; // 50px in root with 16px font-size by deafult
 $header-height: 4.125rem; // 66px in root with 16px font-size by deafult
-
 
 // Slide Navigation
 //

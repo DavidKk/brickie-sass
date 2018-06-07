@@ -7,10 +7,16 @@
 **/
 
 .brickie {
+	position: relative;
 	display: flex;
 	flex-direction: row;
+	margin: 0 auto;
 	width: 100%;
 	height: 100%;
+
+	@include media-breakpoint-up(xxl) {
+		max-width: calc(100% - (#{$nav-width} + #{$gutter} * 2) * 2);
+	}
 }
 
 /**
@@ -59,6 +65,13 @@
 			transform: translate(0, $header-height);
 		}
 	}
+
+	@include media-breakpoint-up(xxl) {
+		position: fixed;
+		height: auto;
+		max-height: 56.25rem;
+		transform: translate(calc(-100% - #{$gutter}), calc(#{$header-height} + #{$gutter}));
+	}
 }
 
 .brickie-navbar .brand {
@@ -70,6 +83,10 @@
 	font-size: $h1-font-size;
 
 	@include media-breakpoint-down(md) {
+		display: none;
+	}
+
+	@include media-breakpoint-up(xxl) {
 		display: none;
 	}
 }
