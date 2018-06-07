@@ -6,8 +6,6 @@
  *
 **/
 
-$header-height: 4.125rem; // 66px in root with 16px font-size by deafult
-
 .brickie {
 	display: flex;
 	flex-direction: row;
@@ -30,11 +28,35 @@ $header-height: 4.125rem; // 66px in root with 16px font-size by deafult
 }
 
 .brickie-navbar {
+	position: relative;
+	z-index: 1;
 	display: flex;
 	flex-direction: column;
-	flex-basis: 15rem;
+	flex-basis: $nav-width;
+	width: $nav-width;
+	height: 100%;
 	background-color: var(--white);
-	box-shadow: 1px 0 20px rgba(0,0,0,.08);
+	box-shadow: 1px 0 1.25rem rgba(0,0,0,.08);
+	transition:
+		width .16s ease-in,
+		height .16s ease-in,
+		transform .16s ease-in;
+
+	@include media-breakpoint-down(md) {
+		flex-basis: $nav-md-width;
+		width: $nav-md-width;
+		height: calc(100% - #{$header-height});
+		transform: translateY($header-height);
+	}
+
+	@include media-breakpoint-down(sm) {
+		height: 100%;
+		transform: translate(-100%, $header-height);
+
+		.brickie-navbar-open & {
+			transform: translate(0, $header-height);
+		}
+	}
 }
 
 .brickie-navbar .brand {
@@ -44,12 +66,21 @@ $header-height: 4.125rem; // 66px in root with 16px font-size by deafult
 	width: 100%;
 	height: $header-height;
 	font-size: $h1-font-size;
+
+	@include media-breakpoint-down(md) {
+		display: none;
+	}
 }
 
 .brickie-container {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
+	transition: margin-left .16s ease-in;
+
+	@include media-breakpoint-down(md) {
+		margin-left: -$nav-md-width;
+	}
 }
 
 .brickie-header {

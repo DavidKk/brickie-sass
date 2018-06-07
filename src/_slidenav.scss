@@ -7,8 +7,6 @@
  * And it also supports sub navigation.
 **/
 
-$slidenav-item-height: 2.5rem; // 40px in root with 16px font-size by default
-
 .slidenav {
 	flex: 1;
 	-webkit-overflow-scrolling: touch;
@@ -29,8 +27,11 @@ $slidenav-item-height: 2.5rem; // 40px in root with 16px font-size by default
 **/
 
 .slidenav-item {
+	position: relative;
+
 	> a {
 		position: relative;
+		z-index: 1;
 		display: flex;
 		align-items: center;
 		padding: 0 .9375rem;
@@ -39,7 +40,7 @@ $slidenav-item-height: 2.5rem; // 40px in root with 16px font-size by default
 		transition:
 			background-color .26s ease-in,
 			color .16s ease;
-    cursor: pointer;
+		cursor: pointer;
   }
 
   /**
@@ -93,9 +94,23 @@ $slidenav-item-height: 2.5rem; // 40px in root with 16px font-size by default
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin-right: .625rem;
 		width: 1.5rem; // 24px
 		height: 1.5rem; // 24px
+  }
+
+  > a > span {
+		margin-left: .625rem;
+	}
+
+	@include media-breakpoint-down(md) {
+		> a {
+			position: relative;
+			justify-content: center;
+		}
+
+		> a > span {
+			display: none;
+		}
 	}
 }
 
@@ -130,14 +145,18 @@ $slidenav-item-height: 2.5rem; // 40px in root with 16px font-size by default
   }
 }
 
-.slidenav-item.active > ul {
-	display: flex;
-}
+
+/* Sub Navigation
+	 ========================================================================== */
 
 /**
  * 1. The size of sub menu item is sum of
  * left padding of link, the icon size in
  * the navigation and its left margin.
+ * 2. If the sub navigation is too height
+ * in popup state, it will span the entire
+ * screen, so it sets the scroll bar when
+ * there are more than 10 item.
 **/
 
 .slidenav-sub {
@@ -147,11 +166,16 @@ $slidenav-item-height: 2.5rem; // 40px in root with 16px font-size by default
 	padding: 0;
 	list-style: none;
 
+	.slidenav-item.active & {
+		display: flex;
+	}
+
 	> li {
 		padding: 0;
 	}
 
-	> li > a {
+	> li > a,
+	> li > span {
 		display: flex;
 		align-items: center;
 		padding-left: .9375rem + 1.5rem + .625rem; // 1
@@ -166,5 +190,39 @@ $slidenav-item-height: 2.5rem; // 40px in root with 16px font-size by default
 
   > li.active > a {
     color: var(--primary);
-  }
+	}
+
+	@include media-breakpoint-down(md) {
+		position: absolute;
+		top: 0;
+		left: 100%;
+		overflow: auto;
+		width: $nav-width;
+		max-height: $slidenav-item-height * 10;	// 2
+		background-color: $gray-100;
+		box-shadow: 1px 0 1.25rem rgba(0,0,0,.08);
+
+		.slidenav-item:hover & {
+			display: flex;
+		}
+
+		> li > a,
+		> li > span {
+			padding-left: .9375rem;
+		}
+	}
+}
+
+.slidenav-sub .slidenav-sub-hero {
+	display: none;
+
+	@include media-breakpoint-down(md) {
+		display: block;
+
+		> a,
+		> span {
+			font-weight: 500;
+			color: var(--secondary);
+		}
+	}
 }
