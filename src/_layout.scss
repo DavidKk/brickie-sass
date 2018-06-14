@@ -82,6 +82,12 @@
 	width: 100%;
 	height: $header-height;
 	font-size: $h1-font-size;
+	transition: color .26s ease-in-out;
+	cursor: pointer;
+
+	&:hover {
+		color: rgba($body-color, .7);
+	}
 
 	@include media-breakpoint-down(md) {
 		display: none;
@@ -123,6 +129,12 @@
 	height: 4.125rem;
 	font-size: $h3-font-size;
 	color: #fff;
+	transition: color .26s ease-in-out;
+	cursor: pointer;
+
+	&:hover {
+		color: rgba(255,255,255,.7);
+	}
 
 	@include media-breakpoint-down(md) {
 		display: flex;

@@ -6,7 +6,7 @@
     "sasslint": "node ./node_modules/stylefmt-kenny/bin/cli.js --recursive 'src/**/*.scss' --config ./.stylelintrc",
     "lint": "npm run sasslint",
     "test": "npm run lint",
-    "develop": "parcel index.html",
+    "develop": "parcel index.html --no-cache",
     "start": "npm run develop"
   },
   "lint-staged": {
@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@mdi/font": "^2.4.85",
+    "animate.css": "^3.6.1",
     "normalize.css": "^8.0.0"
   }
 }
